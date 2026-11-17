@@ -170,6 +170,72 @@ public static class PreviewDashboardHtml
         }
         .preview-wrapper.desktop { width: 700px; }
         .preview-wrapper.mobile { width: 375px; }
+        .email-envelope-card {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 12px 18px;
+            font-size: 13px;
+            color: #1e293b;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .envelope-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .envelope-label {
+            font-weight: 600;
+            color: #64748b;
+            width: 76px;
+            flex-shrink: 0;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .envelope-value {
+            color: #0f172a;
+            word-break: break-word;
+            flex: 1;
+        }
+        .envelope-subject {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .envelope-preheader {
+            color: #475569;
+            font-style: italic;
+            font-size: 12px;
+        }
+        .envelope-meta-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 6px;
+            margin-top: 2px;
+            font-size: 11px;
+            color: #64748b;
+        }
+        .size-badge {
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            background: #ecfdf5;
+            color: #059669;
+            font-size: 11px;
+        }
+        .size-badge.warning {
+            background: #fffbeb;
+            color: #d97706;
+        }
+        .size-badge.danger {
+            background: #fef2f2;
+            color: #dc2626;
+        }
         iframe { width: 100%; height: 100%; border: none; }
         .code-view {
             width: 100%;
@@ -239,7 +305,7 @@ public static class PreviewDashboardHtml
                 <button id="vp-desktop" class="btn-action active" onclick="setViewport('desktop')">Desktop (700px)</button>
                 <button id="vp-mobile" class="btn-action" onclick="setViewport('mobile')">Mobile (375px)</button>
                 <button id="dark-toggle" class="btn-action" onclick="toggleDarkMode()">Dark Sim</button>
-                <input id="smtp-email" type="email" value="test@example.com" style="width: 160px;" placeholder="Email address" />
+                <input id="smtp-email" type="email" value="test@example.com" style="width: 160px;" placeholder="Email address" oninput="updateRecipient(this.value)" />
                 <button class="btn-send" onclick="sendToInbox()">Send</button>
             </div>
         </div>
@@ -248,6 +314,23 @@ public static class PreviewDashboardHtml
             <div id="error-banner"></div>
 
             <div id="preview-container" class="preview-wrapper desktop">
+                <div class="email-envelope-card">
+                    <div class="envelope-row">
+                        <span class="envelope-label">Subject</span>
+                        <span id="env-subject" class="envelope-value envelope-subject">—</span>
+                    </div>
+                    <div class="envelope-row">
+                        <span class="envelope-label">Preheader</span>
+                        <span id="env-preheader" class="envelope-value envelope-preheader">—</span>
+                    </div>
+                    <div class="envelope-meta-bar">
+                        <div>
+                            <span><strong>From:</strong> EmailStudio &lt;notifications@yourdomain.com&gt;</span>
+                            <span style="margin-left: 14px;"><strong>To:</strong> <span id="env-to">test@example.com</span></span>
+                        </div>
+                        <div id="env-size" class="size-badge">0 KB (Gmail Safe)</div>
+                    </div>
+                </div>
                 <iframe id="preview-iframe"></iframe>
             </div>
 
@@ -341,9 +424,31 @@ public static class PreviewDashboardHtml
                 document.getElementById('diag-container').innerText = templateData.diagnostic
                     ? JSON.stringify(templateData.diagnostic, null, 2)
                     : 'All checks passed. Zero diagnostics emitted.';
+
+                // Update envelope header card
+                const subject = templateData.subject || (templateData.draft ? templateData.draft.subject : '—');
+                document.getElementById('env-subject').innerText = subject;
+                document.getElementById('env-preheader').innerText = templateData.preheader || '(No preheader defined)';
+
+                const sizeBadge = document.getElementById('env-size');
+                const kb = templateData.formattedSize || '0 KB';
+                if (templateData.byteSize >= 102 * 1024) {
+                    sizeBadge.className = 'size-badge danger';
+                    sizeBadge.innerText = `${kb} (Gmail Clipping Danger > 102 KB)`;
+                } else if (templateData.isSizeWarning) {
+                    sizeBadge.className = 'size-badge warning';
+                    sizeBadge.innerText = `${kb} (Size Warning > 90 KB)`;
+                } else {
+                    sizeBadge.className = 'size-badge';
+                    sizeBadge.innerText = `${kb} (Gmail Safe)`;
+                }
             } catch (err) {
                 console.error('Failed to fetch template metadata', err);
             }
+        }
+
+        function updateRecipient(val) {
+            document.getElementById('env-to').innerText = val || 'test@example.com';
         }
 
         function setTab(tab) {

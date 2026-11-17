@@ -23,7 +23,12 @@ public sealed record TemplateRenderResult(
     string TemplateName,
     EmailDraft? Draft,
     TemplateDiagnostic? Diagnostic,
-    DateTime LastModified);
+    DateTime LastModified,
+    string? Subject = null,
+    string? Preheader = null,
+    long ByteSize = 0,
+    string FormattedSize = "0 KB",
+    bool IsSizeWarning = false);
 
 /// <summary>
 /// Service that scans, parses, and renders templates and sample data from the workspace.
@@ -177,12 +182,27 @@ public sealed class TemplateService
         try
         {
             var draft = EmailEngine.Render(content, model, renderOptions, templateName);
+            var parsedDoc = FrontMatterParser.Parse(content, templateName);
+            string? preheader = null;
+            if (parsedDoc.FrontMatter.CustomProperties.TryGetValue("preheader", out string? rawPreheader))
+            {
+                preheader = EmailStudio.TemplateEngine.TemplateEvaluator.InterpolateSubject(rawPreheader, model);
+            }
+            long byteSize = System.Text.Encoding.UTF8.GetByteCount(draft.HtmlBody);
+            string formattedSize = $"{(double)byteSize / 1024:F1} KB";
+            bool isWarning = byteSize >= 90 * 1024;
+
             return new TemplateRenderResult(
                 Success: true,
                 TemplateName: templateName,
                 Draft: draft,
                 Diagnostic: null,
-                LastModified: lastModified);
+                LastModified: lastModified,
+                Subject: draft.Subject,
+                Preheader: preheader,
+                ByteSize: byteSize,
+                FormattedSize: formattedSize,
+                IsSizeWarning: isWarning);
         }
         catch (EmailStudioException ex)
         {
