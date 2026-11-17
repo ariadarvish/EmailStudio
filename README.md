@@ -118,10 +118,194 @@ The repository includes a ready-to-run gallery in `samples/Gallery` featuring 10
 9. `AccountDeleted`: Account closure confirmation
 10. `TwoFactorEnabled`: Security notice with 2FA backup codes
 
-To view the gallery in the preview server:
+---
+
+## 🚀 Getting Started (New to this Repository?)
+
+Follow these steps to clone, build, and explore the project in under 60 seconds:
+
+### Prerequisites
+- [.NET 10 or .NET 11 SDK](https://dotnet.microsoft.com/download)
+- Optional: Visual Studio 2026+ or VS Code with C# Dev Kit
+
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/emailstudio/emailstudio.git
+cd EmailStudio
+```
+
+### Step 2: Build and Test
+Verify that everything builds and tests pass cleanly:
+```bash
+dotnet test
+```
+
+### Step 3: Run the Live Preview Server
+You have two convenient ways to run the preview server:
+
+#### Option A: Via Command Line (Terminal)
+Run the gallery directly from the repository root:
 ```bash
 dotnet run --project src/EmailStudio.Tool -- serve samples/Gallery
 ```
+Now open **http://localhost:5055** in your browser.
+
+#### Option B: Via Visual Studio (F5)
+1. Open `EmailStudio.slnx` in Visual Studio.
+2. Ensure **`EmailStudio.Preview`** (or **`EmailStudio.Tool`**) is selected in the Startup Projects dropdown.
+3. Press **F5** (or click the green **Play** button).
+4. Visual Studio will launch Kestrel and open your browser to **http://localhost:5055** automatically with the 10 gallery templates loaded.
+
+### Step 4: Try Live Hot Reload
+1. Keep the browser open at `http://localhost:5055`.
+2. Open `samples/Gallery/Templates/Welcome.cshtml` in your editor.
+3. Change `<Heading level="1">` or adjust a button background color and save the file.
+4. Watch the browser instantly update in < 1 second over WebSockets!
+
+---
+
+## 📦 Client Integration Guide (Add to Your Own Project)
+
+Follow this step-by-step guide to use EmailStudio in your existing .NET 10 or 11 web API, worker service, or backend app.
+
+### Step 1: Install the NuGet Package
+In your application project directory, install `EmailStudio`:
+```bash
+dotnet add package EmailStudio
+```
+*(This single package automatically brings in both the runtime engine and the Roslyn incremental source generator).*
+
+Optionally, install the global CLI preview tool for local development:
+```bash
+dotnet tool install -g EmailStudio.Tool
+```
+
+### Step 2: Scaffold Templates
+Run the `init` command in your project directory (or create a `Templates/` folder):
+```bash
+dotnet email-preview init
+```
+This scaffolds:
+```
+YourApp/
+├── Templates/
+│   ├── _Layouts/
+│   │   └── Base.cshtml
+│   ├── _Partials/
+│   │   └── Footer.cshtml
+│   ├── Welcome.cshtml
+│   └── Welcome.sample.json
+└── Locales/
+    └── de-DE.json
+```
+
+### Step 3: Author Your Email Template
+Create or edit `Templates/Welcome.cshtml`:
+
+```html
+---
+subject: Welcome to Contoso, @Model.UserName!
+preheader: Your developer workspace is ready.
+tags: [onboarding]
+---
+@model YourApp.Models.WelcomeEmailModel
+
+<Heading level="1">Welcome aboard, @Model.UserName!</Heading>
+<p>Thank you for joining Contoso. Your organization workspace is now configured.</p>
+
+<Button href="@Model.ActionUrl" background="#2563eb" color="#ffffff">
+    Open Your Dashboard
+</Button>
+
+<Divider spacing="24px" />
+<Include path="_Partials/Footer.cshtml" />
+```
+
+Create sample mock data in `Templates/Welcome.sample.json` so you can preview it immediately:
+```json
+{
+  "UserName": "Alex Morgan",
+  "ActionUrl": "https://contoso.com/get-started"
+}
+```
+
+### Step 4: Live Preview While Authoring
+Launch the live preview server while writing your templates:
+```bash
+dotnet email-preview serve
+```
+Open `http://localhost:5055` to view desktop (700px) and mobile (375px) renders, dark-mode preview, and real-time syntax error diagnostics.
+
+### Step 5: Render Strongly-Typed Emails in C#
+When you build your project (`dotnet build`), the Roslyn source generator generates typed render methods on `EmailTemplates`. Call them directly with zero runtime Razor overhead:
+
+```csharp
+using EmailStudio;
+using YourApp.Models;
+
+public class NotificationService
+{
+    public async Task SendWelcomeEmailAsync(string email, string name)
+    {
+        var model = new WelcomeEmailModel(name, "https://app.contoso.com/login");
+
+        // Zero-runtime Razor: Generated at compile time, Native AOT friendly!
+        EmailDraft draft = EmailTemplates.RenderWelcome(model, culture: "en-US");
+
+        Console.WriteLine(draft.Subject);   // "Welcome to Contoso, Alex Morgan!"
+        Console.WriteLine(draft.HtmlBody);  // CSS-inlined, responsive HTML
+        Console.WriteLine(draft.PlainText); // Clean markdown-like text
+
+        // Send using your preferred email provider (MailKit, SendGrid, SES, FluentEmail):
+        await DispatchEmailAsync(email, draft);
+    }
+}
+```
+
+### Step 6: Dispatch with Any Sender (e.g. MailKit / MimeKit)
+EmailStudio produces pure `EmailDraft` instances, leaving transmission to your choice of provider:
+
+```csharp
+using MimeKit;
+using MailKit.Net.Smtp;
+
+async Task DispatchEmailAsync(string recipientEmail, EmailDraft draft)
+{
+    var message = new MimeMessage();
+    message.From.Add(new MailboxAddress("Contoso", "noreply@contoso.com"));
+    message.To.Add(new MailboxAddress("", recipientEmail));
+    message.Subject = draft.Subject;
+
+    var builder = new BodyBuilder
+    {
+        HtmlBody = draft.HtmlBody,
+        TextBody = draft.PlainText
+    };
+    message.Body = builder.ToMessageBody();
+
+    using var client = new SmtpClient();
+    await client.ConnectAsync("smtp.mailgun.org", 587, false);
+    await client.AuthenticateAsync("apiKey", "secret");
+    await client.SendAsync(message);
+    await client.DisconnectAsync(true);
+}
+```
+
+### Step 7: Automated Snapshot Testing (Optional)
+Because EmailStudio output is 100% deterministic, you can add snapshot regression tests with `Verify.Xunit`:
+
+```csharp
+[Fact]
+public Task WelcomeEmail_ShouldMatchSnapshot()
+{
+    var model = new WelcomeEmailModel("Test User", "https://example.com");
+    var draft = EmailTemplates.RenderWelcome(model);
+
+    return Verify(new { draft.Subject, draft.HtmlBody, draft.PlainText });
+}
+```
+
+---
 
 ## Architecture
 
