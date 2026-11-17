@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>dotnet-email-preview</ToolCommandName>
+    <PackageId>EmailStudio.Tool</PackageId>
+    <Description>Local preview CLI tool for EmailStudio templates.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EmailStudio\EmailStudio.csproj" />
+    <ProjectReference Include="..\EmailStudio.Preview\EmailStudio.Preview.csproj" />
+  </ItemGroup>
+
+</Project>
+

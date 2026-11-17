@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/EmailStudio.Generator/EmailStudio.Generator.csproj" />
+    <Project Path="src/EmailStudio.Preview/EmailStudio.Preview.csproj" />
+    <Project Path="src/EmailStudio.Tool/EmailStudio.Tool.csproj" />
+    <Project Path="src/EmailStudio/EmailStudio.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/EmailStudio.Generator.Tests/EmailStudio.Generator.Tests.csproj" />
+    <Project Path="tests/EmailStudio.Preview.Tests/EmailStudio.Preview.Tests.csproj" />
+    <Project Path="tests/EmailStudio.Tests/EmailStudio.Tests.csproj" />
+  </Folder>
+</Solution>
