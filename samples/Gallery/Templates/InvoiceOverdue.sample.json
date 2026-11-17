@@ -1,0 +1,8 @@
+{
+  "CustomerName": "Initech Corporation",
+  "InvoiceNumber": "INV-2026-0701",
+  "AmountDue": "$450.00",
+  "DueDate": "November 01, 2026",
+  "PayNowUrl": "https://contoso.com/billing/pay/INV-2026-0701"
+}
+

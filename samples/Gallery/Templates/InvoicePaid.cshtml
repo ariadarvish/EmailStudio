@@ -1,0 +1,42 @@
+---
+subject: Receipt for Invoice #{InvoiceNumber}
+layout: _Layouts/Base
+---
+@model Contoso.Emails.InvoicePaidModel
+
+<div class="alert-banner alert-success">
+    Payment Successful — Thank you for your business!
+</div>
+
+<Heading Level="1">Invoice #{InvoiceNumber}</Heading>
+<p>Hi @Model.CustomerName,</p>
+<p>We've received your payment of <strong>@Model.AmountPaid</strong> on @Model.PaymentDate. Your receipt details are listed below:</p>
+
+<Spacer Height="16" />
+<table border="0" cellpadding="8" cellspacing="0" width="100%" style="border-collapse:collapse;margin-bottom:20px;">
+    <thead>
+        <tr style="border-bottom: 2px solid #e2e8f0; text-align: left; font-size: 13px; color: #64748b;">
+            <th>Description</th>
+            <th style="text-align: right;">Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items) {
+            <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 8px 0;">@item.Description</td>
+                <td style="padding: 8px 0; text-align: right;">@item.Amount</td>
+            </tr>
+        }
+        <tr style="font-weight: bold; border-top: 2px solid #cbd5e1;">
+            <td style="padding: 12px 0;">Total Paid:</td>
+            <td style="padding: 12px 0; text-align: right;">@Model.AmountPaid</td>
+        </tr>
+    </tbody>
+</table>
+
+<Spacer Height="16" />
+<Button Href="@Model.InvoiceUrl" BgColor="#10b981">Download PDF Invoice</Button>
+<Spacer Height="20" />
+<Divider />
+<p class="text-muted">Billed to: @Model.CustomerName (@Model.BillingAddress)</p>
+

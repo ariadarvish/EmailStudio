@@ -1,0 +1,30 @@
+---
+subject: Two-factor authentication enabled for {Email}
+layout: _Layouts/Base
+---
+@model Contoso.Emails.TwoFactorEnabledModel
+
+<div class="alert-banner alert-success">
+    Two-Factor Authentication (2FA) is now active on your account.
+</div>
+
+<Heading Level="1">Two-Factor Authentication Active</Heading>
+<p>Hello @Model.Name,</p>
+<p>Two-factor authentication using <strong>@Model.AuthMethod</strong> was successfully enabled for <strong>@Model.Email</strong> on @Model.EnabledDate.</p>
+<p>From now on, you will be prompted for an authentication code when signing into your Contoso workspace from a new device.</p>
+
+<Spacer Height="16" />
+<table border="0" cellpadding="12" cellspacing="0" width="100%" style="background:#f8fafc;border-left:4px solid #3b82f6;border-radius:4px;margin-bottom:20px;">
+    <tr>
+        <td>
+            <strong>Important reminder:</strong> Store your recovery backup codes in a safe place. If you lose access to your primary device, backup codes are the only way to recover account access.
+        </td>
+    </tr>
+</table>
+
+<Spacer Height="16" />
+<Button Href="@Model.SecuritySettingsUrl" BgColor="#0f172a">View Security Settings</Button>
+<Spacer Height="20" />
+<Divider />
+<p style="font-size: 13px; color: #64748b;"><T.Try Key="security.notice" /></p>
+

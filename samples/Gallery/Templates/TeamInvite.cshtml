@@ -1,0 +1,19 @@
+---
+subject: {InviterName} invited you to join {TeamName} on Contoso
+layout: _Layouts/Base
+---
+@model Contoso.Emails.TeamInviteModel
+
+<Heading Level="1">Join {TeamName} on Contoso</Heading>
+<p>Hi @Model.InviteeEmail,</p>
+<p><strong>@Model.InviterName</strong> has invited you to join the <strong>@Model.TeamName</strong> organization on Contoso with the role of <strong>@Model.Role</strong>.</p>
+<p>Collaborate with your team on email designs, templates, and automated workflows.</p>
+
+<Spacer Height="20" />
+<Button Href="@Model.AcceptUrl" BgColor="#2563eb">Accept Invitation</Button>
+<Spacer Height="20" />
+
+<p class="text-muted">This invitation was sent to @Model.InviteeEmail. If you were not expecting this invitation, you can ignore this email.</p>
+<Divider />
+<p style="font-size: 13px; color: #64748b;">The invitation link will remain valid for 7 days.</p>
+

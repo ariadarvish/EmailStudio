@@ -1,0 +1,13 @@
+{
+  "CustomerName": "Acme Studios",
+  "InvoiceNumber": "INV-2026-0814",
+  "AmountPaid": "$129.00",
+  "PaymentDate": "November 17, 2026",
+  "BillingAddress": "456 Market St, Austin, TX 78701",
+  "InvoiceUrl": "https://contoso.com/billing/invoices/INV-2026-0814.pdf",
+  "Items": [
+    { "Description": "EmailStudio Pro Annual Plan", "Amount": "$99.00" },
+    { "Description": "Priority Support Add-on", "Amount": "$30.00" }
+  ]
+}
+

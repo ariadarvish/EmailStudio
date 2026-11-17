@@ -1,0 +1,40 @@
+---
+subject: Your Contoso Weekly Digest for {WeekDate}
+layout: _Layouts/Base
+---
+@model Contoso.Emails.WeeklyDigestModel
+
+<Heading Level="1">Weekly Summary</Heading>
+<p>Hello @Model.UserName,</p>
+<p>Here is your weekly summary of activity, key metrics, and updates for the week of @Model.WeekDate:</p>
+
+<table border="0" cellpadding="12" cellspacing="0" width="100%" style="background:#f8fafc;border-radius:6px;margin:16px 0;">
+    <tr>
+        <td style="text-align: center; border-right: 1px solid #e2e8f0;">
+            <div style="font-size: 24px; font-weight: bold; color: #2563eb;">@Model.EmailsRendered</div>
+            <div style="font-size: 12px; color: #64748b;">Emails Rendered</div>
+        </td>
+        <td style="text-align: center; border-right: 1px solid #e2e8f0;">
+            <div style="font-size: 24px; font-weight: bold; color: #10b981;">@Model.AverageLatencyMs ms</div>
+            <div style="font-size: 12px; color: #64748b;">Avg Latency</div>
+        </td>
+        <td style="text-align: center;">
+            <div style="font-size: 24px; font-weight: bold; color: #8b5cf6;">@Model.ActiveTemplates</div>
+            <div style="font-size: 12px; color: #64748b;">Active Templates</div>
+        </td>
+    </tr>
+</table>
+
+<Heading Level="2">Top Updates</Heading>
+<ul style="padding-left: 20px; margin-bottom: 20px;">
+    @foreach (var update in Model.Updates) {
+        <li style="margin-bottom: 8px;"><strong>@update.Title</strong>: @update.Summary</li>
+    }
+</ul>
+
+<Spacer Height="16" />
+<Button Href="@Model.DashboardUrl" BgColor="#2563eb">Open Performance Dashboard</Button>
+<Spacer Height="20" />
+<Divider />
+<p style="font-size: 13px; color: #64748b;">Manage your email digest notification preferences in your user profile.</p>
+

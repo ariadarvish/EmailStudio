@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\EmailStudio\EmailStudio.csproj" />
+    <ProjectReference Include="..\..\src\EmailStudio.Preview\EmailStudio.Preview.csproj" />
+    <ProjectReference Include="..\..\src\EmailStudio.Tool\EmailStudio.Tool.csproj" />
   </ItemGroup>
 
 </Project>

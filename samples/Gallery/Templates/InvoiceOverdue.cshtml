@@ -1,0 +1,23 @@
+---
+subject: Overdue Notice: Invoice #{InvoiceNumber} requires attention
+layout: _Layouts/Base
+---
+@model Contoso.Emails.InvoiceOverdueModel
+
+<div class="alert-banner alert-danger">
+    Urgent: Your account has an overdue invoice of @Model.AmountDue.
+</div>
+
+<Heading Level="1">Payment Past Due</Heading>
+<p>Dear @Model.CustomerName,</p>
+<p>Our records indicate that invoice <strong>#{InvoiceNumber}</strong> was due on @Model.DueDate and remains unpaid.</p>
+<p>Please settle the outstanding balance of <strong>@Model.AmountDue</strong> immediately to avoid service interruption.</p>
+
+<Spacer Height="20" />
+<Button Href="@Model.PayNowUrl" BgColor="#dc2626">Pay Now Online</Button>
+<Spacer Height="20" />
+
+<p class="text-muted">If you have already submitted payment in the last 24 hours, please disregard this notice.</p>
+<Divider />
+<p style="font-size: 13px; color: #64748b;">Questions regarding this invoice? Reply to billing@contoso.com.</p>
+

@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using EmailStudio.Preview;
 
 namespace EmailStudio.Tool;
 
@@ -23,24 +22,19 @@ public static class Program
         var command = args[0].ToLowerInvariant();
         switch (command)
         {
-            case "serve":
-                Console.WriteLine("Starting EmailStudio preview server on http://localhost:5173...");
-                var app = PreviewServer.CreateApp(args[1..]);
-                await app.RunAsync();
-                return 0;
-
             case "init":
-                Console.WriteLine("Initializing new EmailStudio template workspace...");
-                // CLI init implementation in M4
-                return 0;
+                return CliCommands.Init(args);
+
+            case "serve":
+                return await CliCommands.ServeAsync(args[1..]);
 
             case "render":
-                Console.WriteLine("Rendering email templates...");
-                // CLI headless render implementation in M4
-                return 0;
+                return CliCommands.Render(args);
 
             default:
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.Error.WriteLine($"Unknown command '{command}'.");
+                Console.ResetColor();
                 PrintUsage();
                 return 1;
         }
@@ -53,13 +47,12 @@ public static class Program
         Console.WriteLine("Usage: dotnet email-preview <command> [options]");
         Console.WriteLine();
         Console.WriteLine("Commands:");
-        Console.WriteLine("  init      Scaffold template workspace with layouts, starter templates, and locales");
-        Console.WriteLine("  serve     Start local preview server with hot reload");
-        Console.WriteLine("  render    Headless compile and render of templates with size guard validation");
+        Console.WriteLine("  init [path]                           Scaffold workspace with layouts, starter templates, and locales");
+        Console.WriteLine("  serve [path] [--port 5173]            Start local preview server with WebSocket hot reload");
+        Console.WriteLine("  render [path] [--culture cc] [--out]  Headless batch render of templates with size guard enforcement");
         Console.WriteLine();
         Console.WriteLine("Options:");
-        Console.WriteLine("  -v, --version    Show version information");
-        Console.WriteLine("  -h, --help       Show help information");
+        Console.WriteLine("  -v, --version                         Show version information");
+        Console.WriteLine("  -h, --help                            Show help information");
     }
 }
-

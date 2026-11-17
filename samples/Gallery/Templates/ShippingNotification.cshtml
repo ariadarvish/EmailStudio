@@ -1,0 +1,36 @@
+---
+subject: Your order #{OrderNumber} has shipped!
+layout: _Layouts/Base
+---
+@model Contoso.Emails.ShippingNotificationModel
+
+<Heading Level="1">Order #{OrderNumber} is on the way!</Heading>
+<p>Hello @Model.CustomerName,</p>
+<p>Great news! Your package was dispatched on @Model.DispatchedDate via <strong>@Model.Carrier</strong>.</p>
+
+<table border="0" cellpadding="8" cellspacing="0" width="100%" style="background:#f8fafc;border-radius:6px;margin:16px 0;">
+    <tr>
+        <td style="font-weight:bold;color:#475569;width:140px;">Tracking Number:</td>
+        <td style="font-family:monospace;font-size:15px;color:#2563eb;">@Model.TrackingNumber</td>
+    </tr>
+    <tr>
+        <td style="font-weight:bold;color:#475569;">Estimated Delivery:</td>
+        <td><strong>@Model.EstimatedDelivery</strong></td>
+    </tr>
+    <tr>
+        <td style="font-weight:bold;color:#475569;">Shipping To:</td>
+        <td>@Model.ShippingAddress</td>
+    </tr>
+</table>
+
+<Spacer Height="16" />
+<Button Href="@Model.TrackingUrl" BgColor="#2563eb"><T.Try Key="actions.track" /></Button>
+<Spacer Height="20" />
+<Divider />
+<p class="text-muted">Items in this shipment:</p>
+<ul style="padding-left: 20px; font-size: 14px;">
+    @foreach (var item in Model.Items) {
+        <li>@item.Quantity x @item.Name</li>
+    }
+</ul>
+

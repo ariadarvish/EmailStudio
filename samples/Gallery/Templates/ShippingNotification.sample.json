@@ -1,0 +1,15 @@
+{
+  "CustomerName": "Jim Halpert",
+  "OrderNumber": "ORD-2026-9810",
+  "DispatchedDate": "November 17, 2026",
+  "Carrier": "FedEx Express",
+  "TrackingNumber": "794820194820",
+  "EstimatedDelivery": "Friday, November 20, 2026",
+  "ShippingAddress": "1725 Slough Ave, Scranton, PA 18503",
+  "TrackingUrl": "https://fedex.com/tracking?tracknumbers=794820194820",
+  "Items": [
+    { "Quantity": "2", "Name": "Wireless Ergonomic Keyboard" },
+    { "Quantity": "1", "Name": "USB-C Dual 4K Docking Station" }
+  ]
+}
+

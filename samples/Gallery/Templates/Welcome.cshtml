@@ -1,0 +1,18 @@
+---
+subject: Welcome to Contoso, {Name}!
+layout: _Layouts/Base
+---
+@model Contoso.Emails.WelcomeModel
+
+<Heading Level="1">Welcome aboard, @Model.Name!</Heading>
+<p>Thanks for creating an account with Contoso. We're excited to help you streamline your developer workflows.</p>
+<p>To get started, please confirm your email address by clicking the button below:</p>
+
+<Spacer Height="20" />
+<Button Href="@Model.ConfirmUrl" BgColor="#2563eb">Confirm Email Address</Button>
+<Spacer Height="20" />
+
+<p class="text-muted">If button clicking does not work, copy and paste this link into your browser: <br/>@Model.ConfirmUrl</p>
+<Divider />
+<p style="font-size: 13px; color: #64748b;">This confirmation link will expire in 24 hours.</p>
+

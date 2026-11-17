@@ -1,0 +1,8 @@
+{
+  "Name": "Stanley Hudson",
+  "Email": "stanley.hudson@dundermifflin.com",
+  "AuthMethod": "Authenticator App (TOTP)",
+  "EnabledDate": "November 17, 2026",
+  "SecuritySettingsUrl": "https://contoso.com/account/security"
+}
+
