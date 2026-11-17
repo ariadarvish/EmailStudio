@@ -1,0 +1,44 @@
+---
+subject: خوش‌آمدید به سامانه، {Name} عزیز!
+preheader: حساب کاربری شما با موفقیت فعال شد. برای شروع روی دکمه زیر کلیک کنید.
+layout: _Layouts/BaseRtl.cshtml
+tags: [onboarding, persian, rtl, transactional]
+---
+@model EmailStudio.Samples.PersianWelcomeModel
+
+<div style="text-align: center; margin-bottom: 24px;">
+    <Image src="@Model.LogoUrl" alt="لوگوی شرکت" width="130" height="32" />
+</div>
+
+<div style="border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
+    <Image src="@Model.BannerUrl" alt="خوش آمدید" width="536" height="180" />
+</div>
+
+<Heading level="1" align="right">سلام @Model.Name عزیز، خوش آمدید!</Heading>
+
+<p style="font-size: 15px; color: #475569; line-height: 1.8; text-align: right; margin: 0 0 16px 0;">
+    حساب کاربری شما در سامانه با موفقیت راه‌اندازی شد. اکنون فضای کاری اختصاصی شما آماده استفاده است.
+</p>
+
+<Spacer height="12px" />
+
+<div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px 20px; margin-bottom: 24px; direction: rtl; text-align: right;">
+    <p style="margin: 0 0 10px 0; font-weight: 700; color: #0f172a; font-size: 14px;">گام‌های بعدی برای شروع همکاری:</p>
+    <ul style="margin: 0; padding-right: 20px; padding-left: 0; color: #334155; font-size: 14px; line-height: 2;">
+        <li>تکمیل اطلاعات نمایه کاربری و تنظیمات امنیتی</li>
+        <li>دعوت از همکاران و اعضای تیم به فضای کاری مشترک</li>
+        <li>اتصال ابزارها و وب‌هوک‌های اطلاع‌رسانی پروژه</li>
+    </ul>
+</div>
+
+<div style="text-align: center; margin: 32px 0;">
+    <Button href="@Model.ActionUrl" background="#2563eb" color="#ffffff">
+        ورود به پنل کاربری
+    </Button>
+</div>
+
+<Divider margin="24px 0" />
+
+<p class="text-muted" style="margin: 0; text-align: center; font-size: 13px;">
+    نیاز به راهنمایی دارید؟ <a href="@Model.SupportUrl" style="color: #2563eb; text-decoration: underline;">مستندات سامانه</a> را مطالعه فرمایید یا با پشتیبانی تماس بگیرید.
+</p>

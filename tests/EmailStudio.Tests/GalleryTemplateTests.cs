@@ -39,8 +39,8 @@ public sealed class GalleryTemplateTests
         var service = new TemplateService(options);
         var templates = service.GetTemplates();
 
-        // Assert: 5 rich production templates present
-        templates.Should().HaveCount(5);
+        // Assert: 6 rich production templates present
+        templates.Should().HaveCount(6);
 
         string[] expectedTemplateNames =
         [
@@ -48,7 +48,8 @@ public sealed class GalleryTemplateTests
             "Welcome",
             "InvoiceReceipt",
             "ShippingNotification",
-            "SecurityAlert"
+            "SecurityAlert",
+            "PersianWelcome"
         ];
 
         templates.Select(t => t.Name).Should().BeEquivalentTo(expectedTemplateNames);
@@ -134,6 +135,33 @@ public sealed class GalleryTemplateTests
         result.Draft.HtmlBody.Should().Contain("width=\"536\" height=\"240\"");
         result.Draft.HtmlBody.Should().Contain("display: block;outline: none;border: none;text-decoration: none;max-width: 100%");
         result.Draft.HtmlBody.Should().Contain("https://dummyimage.com/96x96/64748b/ffffff.png");
+    }
+
+    [Fact]
+    public void Gallery_PersianWelcome_ShouldRenderRtlAttributesAndPersianText()
+    {
+        // Arrange
+        var options = new PreviewServerOptions
+        {
+            TemplateDirectory = _galleryTemplatesDir,
+            LocalesDirectory = _galleryLocalesDir
+        };
+        var service = new TemplateService(options);
+
+        // Act
+        var result = service.Render("PersianWelcome", "fa-IR");
+
+        // Assert
+        result.Success.Should().BeTrue();
+        result.Draft.Should().NotBeNull();
+        result.Draft!.Subject.Should().Be("خوش‌آمدید به سامانه، آریا عزیز!");
+        result.Draft.HtmlBody.Should().Contain("dir=\"rtl\"");
+        result.Draft.HtmlBody.Should().Contain("direction: rtl");
+        result.Draft.HtmlBody.Should().Contain("سلام آریا عزیز، خوش آمدید!");
+        result.Draft.HtmlBody.Should().Contain("ورود به پنل کاربری");
+        result.Draft.HtmlBody.Should().Contain("این یک پیام خودکار است، لطفاً به آن پاسخ ندهید.");
+        result.Draft.TextBody.Should().Contain("سلام آریا عزیز، خوش آمدید!");
+        result.Draft.TextBody.Should().Contain("ورود به پنل کاربری (https://example.com/panel)");
     }
 }
 

@@ -9,7 +9,7 @@ tags: [billing, invoice, transactional]
 <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="margin-bottom: 24px;">
     <tr>
         <td valign="middle">
-            <Image src="@Model.LogoUrl" alt="Contoso" width="120" height="30" />
+            <Image src="@Model.LogoUrl" alt="Company Logo" width="120" height="30" />
         </td>
         <td valign="middle" align="right">
             <span style="background-color: #d1fae5; color: #065f46; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 9999px;">
@@ -19,7 +19,7 @@ tags: [billing, invoice, transactional]
     </tr>
 </table>
 
-<Heading level="1">Receipt from Contoso</Heading>
+<Heading level="1">Payment Receipt</Heading>
 
 <p style="color: #64748b; font-size: 14px; margin: 0 0 20px 0;">
     Invoice <strong>#@Model.InvoiceNumber</strong> &bull; Paid on @Model.PaymentDate
@@ -79,5 +79,6 @@ tags: [billing, invoice, transactional]
 <Divider margin="20px 0" />
 
 <p class="text-muted" style="margin: 0; text-align: center; font-size: 12px;">
-    Questions about this receipt? Contact our billing team at <a href="mailto:billing@contoso.com" style="color: #2563eb;">billing@contoso.com</a>.
+    Questions about this receipt? Contact our billing team at <a href="mailto:billing@example.com" style="color: #2563eb;">billing@example.com</a>.
 </p>
+

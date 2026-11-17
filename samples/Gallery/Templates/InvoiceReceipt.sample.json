@@ -7,8 +7,8 @@
   "CustomerName": "Acme Corp (Attn: John Doe)",
   "CustomerEmail": "john.doe@acme.com",
   "PaymentMethod": "Mastercard ending in 4242",
-  "LogoUrl": "https://dummyimage.com/240x60/0f172a/ffffff.png&text=Contoso+Billing",
-  "DownloadPdfUrl": "https://app.contoso.com/invoices/INV-2026-8812.pdf",
+  "LogoUrl": "https://dummyimage.com/240x60/0f172a/ffffff.png&text=Company+Logo",
+  "DownloadPdfUrl": "https://example.com/invoices/INV-2026-8812.pdf",
   "Items": [
     {
       "Description": "EmailStudio Pro Plan (Annual Subscription)",
@@ -22,3 +22,4 @@
     }
   ]
 }
+

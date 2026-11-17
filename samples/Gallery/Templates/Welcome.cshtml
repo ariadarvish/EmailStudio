@@ -1,5 +1,5 @@
 ---
-subject: Welcome to Contoso, {Name}!
+subject: Welcome to Your App, {Name}!
 preheader: Your developer workspace is ready. Let's get you set up in 3 easy steps.
 layout: _Layouts/Base.cshtml
 tags: [onboarding, transactional]
@@ -7,17 +7,17 @@ tags: [onboarding, transactional]
 @model EmailStudio.Samples.WelcomeModel
 
 <div style="text-align: center; margin-bottom: 24px;">
-    <Image src="@Model.LogoUrl" alt="Contoso" width="130" height="32" />
+    <Image src="@Model.LogoUrl" alt="Company Logo" width="130" height="32" />
 </div>
 
 <div style="border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
-    <Image src="@Model.BannerUrl" alt="Welcome to Contoso" width="536" height="180" />
+    <Image src="@Model.BannerUrl" alt="Welcome to Your App" width="536" height="180" />
 </div>
 
 <Heading level="1">Welcome aboard, @Model.Name!</Heading>
 
 <p style="font-size: 15px; color: #475569; line-height: 1.6;">
-    Thank you for creating an account with Contoso. Your organization workspace is now live and waiting for you.
+    Thank you for creating an account. Your workspace is now live and waiting for you.
 </p>
 
 <Spacer height="12px" />
@@ -42,3 +42,4 @@ tags: [onboarding, transactional]
 <p class="text-muted" style="margin: 0; text-align: center;">
     Need help? Check out our <a href="@Model.DocsUrl" style="color: #2563eb; text-decoration: underline;">Quickstart Documentation</a> or reply to this email.
 </p>
+
