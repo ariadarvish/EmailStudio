@@ -108,3 +108,4 @@ public sealed class TemplateEvaluatorTests
         subject.Should().Be("Order #98765 Confirmed for Jane!");
     }
 }
+

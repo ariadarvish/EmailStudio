@@ -63,3 +63,4 @@ public sealed class CssInlinerTests
         result.Should().Contain("width: 600px");
     }
 }
+

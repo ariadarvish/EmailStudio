@@ -86,3 +86,4 @@ public sealed class FrontMatterParserTests
         doc.Body.Should().Be(template);
     }
 }
+

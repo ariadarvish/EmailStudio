@@ -30,3 +30,4 @@ HTML email clients (most notably Microsoft Outlook on Windows using the Word ren
 
 - Templates can be authored using clean, semantic tags and standard CSS classes, which are automatically transformed into email-safe markup.
 - Full compatibility with major email clients without manual HTML table boilerplate.
+

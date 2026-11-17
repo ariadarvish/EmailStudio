@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\EmailStudio\EmailStudio.csproj" />
     <ProjectReference Include="..\..\src\EmailStudio.Generator\EmailStudio.Generator.csproj" />
   </ItemGroup>
 

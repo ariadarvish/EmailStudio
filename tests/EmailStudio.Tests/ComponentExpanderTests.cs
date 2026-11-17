@@ -140,3 +140,4 @@ public sealed class ComponentExpanderTests
             .Where(e => e.DiagnosticCode == "TPL009");
     }
 }
+

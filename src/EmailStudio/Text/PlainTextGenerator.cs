@@ -122,3 +122,4 @@ public static partial class PlainTextGenerator
         return sb.ToString().Trim();
     }
 }
+

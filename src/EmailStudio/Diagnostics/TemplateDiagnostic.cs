@@ -95,3 +95,4 @@ public sealed class MissingLocaleKeyException : EmailStudioException
     public MissingLocaleKeyException(string key, string culture)
         : base("TPL009", $"Locale key '{key}' was not found in dictionary for culture '{culture}'.") { }
 }
+

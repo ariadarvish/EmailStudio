@@ -49,3 +49,4 @@ public sealed class PlainTextGeneratorTests
         text.Should().NotContain("<h1");
     }
 }
+

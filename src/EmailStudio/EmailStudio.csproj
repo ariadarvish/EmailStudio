@@ -10,5 +10,9 @@
     <PackageReference Include="PreMailer.Net" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EmailStudio.Generator\EmailStudio.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
 </Project>
 

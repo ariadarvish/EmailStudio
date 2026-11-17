@@ -1,0 +1,8 @@
+<Project>
+  <ItemGroup>
+    <AdditionalFiles Include="Templates/**/*.cshtml" Condition="Exists('Templates')" />
+    <AdditionalFiles Include="Templates/**/*.sample.json" Condition="Exists('Templates')" />
+    <AdditionalFiles Include="Locales/**/*.json" Condition="Exists('Locales')" />
+  </ItemGroup>
+</Project>
+

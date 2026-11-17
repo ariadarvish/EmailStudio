@@ -54,3 +54,4 @@ public sealed class EmailRenderer : IEmailRenderer
             $"No template registered for model type '{typeof(TModel).FullName}'. Ensure a template is registered or use generated EmailTemplates.");
     }
 }
+

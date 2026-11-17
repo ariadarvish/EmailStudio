@@ -136,3 +136,4 @@ public static partial class CssInliner
         return result;
     }
 }
+

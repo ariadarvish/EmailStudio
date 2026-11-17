@@ -19,3 +19,4 @@ public sealed record TemplateDocument(
     FrontMatter FrontMatter,
     string Body,
     string? ModelType = null);
+

@@ -162,3 +162,4 @@ public static partial class FrontMatterParser
         return new FrontMatter(subject, layout, plainText, custom);
     }
 }
+
