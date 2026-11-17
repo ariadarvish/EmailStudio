@@ -29,17 +29,14 @@ EmailStudio bridges the developer experience gap for transactional emails in .NE
 ## Quick Start
 
 ```bash
-# 1. Install CLI preview tool
+# Option A: In this repository (direct run without installing):
+dotnet run --project src/EmailStudio.Tool -- init
+dotnet run --project src/EmailStudio.Tool -- serve samples/Gallery
+
+# Option B: Global tool (once published or installed locally):
 dotnet tool install -g EmailStudio.Tool
-
-# 2. Initialize a template project
 dotnet email-preview init
-
-# 3. Start hot-reload preview server
 dotnet email-preview serve
-
-# 4. Or statically render templates to disk
-dotnet email-preview render . --out dist --culture en-US
 ```
 
 ## Features
