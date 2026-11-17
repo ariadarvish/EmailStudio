@@ -94,3 +94,4 @@ The `samples/Gallery` currently includes German (`de-DE`) and French (`fr-FR`) t
 - Add `samples/Gallery/Locales/es-ES.json` with keys for `greeting`, `footer.copyright`, etc.
 - Add `samples/Gallery/Locales/it-IT.json`.
 - Add integration assertions in `GalleryTemplateTests.cs` verifying Spanish and Italian dictionary lookups.
+

@@ -29,3 +29,4 @@ EmailStudio delivers both a developer authoring engine and a compile-time source
 - **Positive**: Consumers simply run `dotnet add package EmailStudio`. They immediately get typed compile-time render methods generated and runtime classes without complex configuration.
 - **Positive**: The preview CLI is globally installable with one command and works seamlessly across projects.
 - **Trade-off**: The generator DLL must remain strictly `netstandard2.0` with no external dependencies that aren't packaged or bundled with Roslyn.
+
