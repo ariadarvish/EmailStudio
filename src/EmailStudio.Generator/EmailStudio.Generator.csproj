@@ -6,6 +6,7 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NoWarn>$(NoWarn);RS2008</NoWarn>
+    <IsPackable>false</IsPackable>
     <Description>Roslyn source generator for EmailStudio templates.</Description>
   </PropertyGroup>
 

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
     <Description>Compile-time email templating engine producing email-ready HTML and text drafts.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +13,21 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EmailStudio.Generator\EmailStudio.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\EmailStudio.Generator\bin\$(Configuration)\netstandard2.0\EmailStudio.Generator.dll"
+          Pack="true"
+          PackagePath="analyzers/dotnet/cs"
+          Visible="false" />
+    <None Include="build\EmailStudio.props"
+          Pack="true"
+          PackagePath="build"
+          Visible="false" />
+    <None Include="..\..\README.md"
+          Pack="true"
+          PackagePath=""
+          Visible="false" />
   </ItemGroup>
 
 </Project>

@@ -7,11 +7,19 @@
     <ToolCommandName>dotnet-email-preview</ToolCommandName>
     <PackageId>EmailStudio.Tool</PackageId>
     <Description>Local preview CLI tool for EmailStudio templates.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\EmailStudio\EmailStudio.csproj" />
     <ProjectReference Include="..\EmailStudio.Preview\EmailStudio.Preview.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md"
+          Pack="true"
+          PackagePath=""
+          Visible="false" />
   </ItemGroup>
 
 </Project>
