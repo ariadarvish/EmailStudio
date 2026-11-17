@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "EmailStudio.Tool (Serve Gallery)": {
+      "commandName": "Project",
+      "commandLineArgs": "serve samples/Gallery",
+      "workingDirectory": "$(SolutionDir)",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5055"
+    }
+  }
+}
+
