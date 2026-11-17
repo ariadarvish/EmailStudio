@@ -1,5 +1,7 @@
 {
   "Name": "Aria",
-  "ConfirmUrl": "https://contoso.com/auth/confirm?token=sec_9843a8bf02"
+  "LogoUrl": "https://dummyimage.com/260x64/2563eb/ffffff.png&text=Contoso",
+  "BannerUrl": "https://dummyimage.com/1072x360/3b82f6/ffffff.png&text=Welcome+to+Your+Workspace",
+  "ActionUrl": "https://app.contoso.com/workspace",
+  "DocsUrl": "https://docs.contoso.com"
 }
-

@@ -1,36 +1,55 @@
 ---
 subject: Your order #{OrderNumber} has shipped!
-layout: _Layouts/Base
+preheader: Your package is on its way and scheduled to arrive on {EstimatedDelivery}.
+layout: _Layouts/Base.cshtml
+tags: [ecommerce, shipping, transactional]
 ---
-@model Contoso.Emails.ShippingNotificationModel
+@model EmailStudio.Samples.ShippingNotificationModel
 
-<Heading Level="1">Order #{OrderNumber} is on the way!</Heading>
-<p>Hello @Model.CustomerName,</p>
-<p>Great news! Your package was dispatched on @Model.DispatchedDate via <strong>@Model.Carrier</strong>.</p>
+<div style="text-align: center; margin-bottom: 20px;">
+    <Image src="@Model.DeliveryGraphicUrl" alt="Package Out for Delivery" width="536" height="130" />
+</div>
 
-<table border="0" cellpadding="8" cellspacing="0" width="100%" style="background:#f8fafc;border-radius:6px;margin:16px 0;">
-    <tr>
-        <td style="font-weight:bold;color:#475569;width:140px;">Tracking Number:</td>
-        <td style="font-family:monospace;font-size:15px;color:#2563eb;">@Model.TrackingNumber</td>
-    </tr>
-    <tr>
-        <td style="font-weight:bold;color:#475569;">Estimated Delivery:</td>
-        <td><strong>@Model.EstimatedDelivery</strong></td>
-    </tr>
-    <tr>
-        <td style="font-weight:bold;color:#475569;">Shipping To:</td>
-        <td>@Model.ShippingAddress</td>
-    </tr>
-</table>
+<Heading level="1">Your Package is on the Way!</Heading>
 
-<Spacer Height="16" />
-<Button Href="@Model.TrackingUrl" BgColor="#2563eb"><T.Try Key="actions.track" /></Button>
-<Spacer Height="20" />
-<Divider />
-<p class="text-muted">Items in this shipment:</p>
-<ul style="padding-left: 20px; font-size: 14px;">
-    @foreach (var item in Model.Items) {
-        <li>@item.Quantity x @item.Name</li>
-    }
-</ul>
+<p style="font-size: 15px; color: #475569; line-height: 1.6; margin-bottom: 24px;">
+    Great news, @Model.CustomerName! Your order <strong>#@Model.OrderNumber</strong> has been shipped via @Model.Carrier.
+</p>
 
+<div style="background-color: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; padding: 16px 20px; margin-bottom: 24px;">
+    <p style="margin: 0; font-size: 12px; font-weight: 700; color: #065f46; text-transform: uppercase;">Estimated Arrival</p>
+    <p style="margin: 4px 0 0 0; font-size: 18px; font-weight: 700; color: #047857;">@Model.EstimatedDelivery</p>
+</div>
+
+<div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; margin-bottom: 24px;">
+    <p style="margin: 0 0 14px 0; font-size: 13px; font-weight: 700; color: #64748b; text-transform: uppercase;">Items in this shipment</p>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+        <tr>
+            <td width="70" valign="top">
+                <Image src="@Model.ProductImageUrl" alt="@Model.ProductName" width="60" height="60" />
+            </td>
+            <td valign="top" style="padding-left: 14px;">
+                <p style="margin: 0; font-weight: 600; color: #0f172a; font-size: 14px;">@Model.ProductName</p>
+                <p style="margin: 2px 0 0 0; color: #64748b; font-size: 13px;">Qty: @Model.Quantity &bull; Color: @Model.Variant</p>
+                <p style="margin: 4px 0 0 0; font-weight: 600; color: #059669; font-size: 13px;">@Model.Price</p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div style="background-color: #f8fafc; border-radius: 8px; padding: 14px 18px; margin-bottom: 28px; font-size: 13px; color: #475569;">
+    <strong>Tracking Number:</strong> <span style="font-family: monospace; color: #0f172a; font-weight: 600;">@Model.TrackingNumber</span><br />
+    <strong>Carrier:</strong> @Model.Carrier &bull; @Model.ShippingService
+</div>
+
+<div style="text-align: center; margin-bottom: 28px;">
+    <Button href="@Model.TrackingUrl" background="#059669" color="#ffffff">
+        Track Your Package
+    </Button>
+</div>
+
+<Divider margin="20px 0" />
+
+<p class="text-muted" style="margin: 0; text-align: center; font-size: 12px;">
+    Shipped to: @Model.ShippingAddress
+</p>

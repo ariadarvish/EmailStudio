@@ -28,7 +28,7 @@ public sealed class GalleryTemplateTests
     }
 
     [Fact]
-    public void Gallery_AllTenTemplates_ShouldRenderSuccessfullyWithinSizeLimits()
+    public void Gallery_RichTemplates_ShouldRenderSuccessfullyWithinSizeLimits()
     {
         // Arrange
         var options = new PreviewServerOptions
@@ -39,21 +39,16 @@ public sealed class GalleryTemplateTests
         var service = new TemplateService(options);
         var templates = service.GetTemplates();
 
-        // Assert: 10 templates present
-        templates.Should().HaveCount(10);
+        // Assert: 5 rich production templates present
+        templates.Should().HaveCount(5);
 
         string[] expectedTemplateNames =
         [
-            "AccountDeleted",
-            "InvoiceOverdue",
-            "InvoicePaid",
-            "PasswordChanged",
-            "ResetPassword",
+            "ProductLaunch",
+            "Welcome",
+            "InvoiceReceipt",
             "ShippingNotification",
-            "TeamInvite",
-            "TwoFactorEnabled",
-            "WeeklyDigest",
-            "Welcome"
+            "SecurityAlert"
         ];
 
         templates.Select(t => t.Name).Should().BeEquivalentTo(expectedTemplateNames);
@@ -117,6 +112,28 @@ public sealed class GalleryTemplateTests
 
         deResult.Draft!.HtmlBody.Should().Contain("Bitte antworten Sie nicht");
         frResult.Draft!.HtmlBody.Should().Contain("Veuillez ne pas répondre");
+    }
+
+    [Fact]
+    public void Gallery_ProductLaunch_ShouldRenderImagesWithEmailSafeAttributes()
+    {
+        // Arrange
+        var options = new PreviewServerOptions
+        {
+            TemplateDirectory = _galleryTemplatesDir,
+            LocalesDirectory = _galleryLocalesDir
+        };
+        var service = new TemplateService(options);
+
+        // Act
+        var result = service.Render("ProductLaunch");
+
+        // Assert
+        result.Success.Should().BeTrue();
+        result.Draft!.HtmlBody.Should().Contain("https://dummyimage.com/1072x480/0f172a/38bdf8.png");
+        result.Draft.HtmlBody.Should().Contain("width=\"536\" height=\"240\"");
+        result.Draft.HtmlBody.Should().Contain("display: block;outline: none;border: none;text-decoration: none;max-width: 100%");
+        result.Draft.HtmlBody.Should().Contain("https://dummyimage.com/96x96/64748b/ffffff.png");
     }
 }
 

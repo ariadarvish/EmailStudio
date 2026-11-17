@@ -1,0 +1,56 @@
+---
+subject: Security Alert: New sign-in detected on your account
+preheader: We detected a new login to your account from {Location} on {Device}.
+layout: _Layouts/Base.cshtml
+tags: [security, authentication, transactional]
+---
+@model EmailStudio.Samples.SecurityAlertModel
+
+<div style="text-align: center; margin-bottom: 20px;">
+    <Image src="@Model.ShieldImageUrl" alt="Security Notice" width="56" height="56" />
+</div>
+
+<Heading level="1">New Sign-In Detected</Heading>
+
+<p style="font-size: 15px; color: #475569; line-height: 1.6;">
+    Hi @Model.UserName, we noticed a new sign-in to your Contoso account. If this was you, you can safely ignore this email.
+</p>
+
+<Spacer height="12px" />
+
+<div style="background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 18px 20px; margin-bottom: 24px;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="font-size: 13px; color: #334155;">
+        <tr>
+            <td width="110" style="padding: 6px 0; color: #991b1b; font-weight: 600;">Device:</td>
+            <td style="padding: 6px 0; font-weight: 500;">@Model.Device</td>
+        </tr>
+        <tr>
+            <td style="padding: 6px 0; color: #991b1b; font-weight: 600;">Location:</td>
+            <td style="padding: 6px 0; font-weight: 500;">@Model.Location</td>
+        </tr>
+        <tr>
+            <td style="padding: 6px 0; color: #991b1b; font-weight: 600;">IP Address:</td>
+            <td style="padding: 6px 0; font-family: monospace;">@Model.IpAddress</td>
+        </tr>
+        <tr>
+            <td style="padding: 6px 0; color: #991b1b; font-weight: 600;">Date & Time:</td>
+            <td style="padding: 6px 0; font-weight: 500;">@Model.Timestamp</td>
+        </tr>
+    </table>
+</div>
+
+<p style="font-size: 14px; color: #991b1b; font-weight: 600; margin-bottom: 20px; text-align: center;">
+    Don't recognize this activity? Secure your account immediately:
+</p>
+
+<div style="text-align: center; margin-bottom: 28px;">
+    <Button href="@Model.SecureAccountUrl" background="#dc2626" color="#ffffff">
+        Review & Secure Account
+    </Button>
+</div>
+
+<Divider margin="20px 0" />
+
+<p class="text-muted" style="margin: 0; text-align: center; font-size: 12px;">
+    To protect your account, we recommend enabling two-factor authentication in your account settings.
+</p>

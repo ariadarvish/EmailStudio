@@ -1,0 +1,11 @@
+{
+  "ProductName": "EmailStudio 2.0",
+  "Category": "Transactional Email",
+  "RecipientName": "Alex Morgan",
+  "LogoUrl": "https://dummyimage.com/280x72/2563eb/ffffff.png&text=Contoso+Tech",
+  "HeroImageUrl": "https://dummyimage.com/1072x480/0f172a/38bdf8.png&text=EmailStudio+2.0+Launch",
+  "ActionUrl": "https://example.com/product-launch",
+  "AuthorName": "Sarah Jenkins",
+  "AuthorTitle": "Head of Engineering",
+  "AuthorAvatarUrl": "https://dummyimage.com/96x96/64748b/ffffff.png&text=SJ"
+}

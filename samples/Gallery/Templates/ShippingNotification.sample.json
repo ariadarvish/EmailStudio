@@ -1,15 +1,16 @@
 {
-  "CustomerName": "Jim Halpert",
-  "OrderNumber": "ORD-2026-9810",
-  "DispatchedDate": "November 17, 2026",
-  "Carrier": "FedEx Express",
-  "TrackingNumber": "794820194820",
-  "EstimatedDelivery": "Friday, November 20, 2026",
-  "ShippingAddress": "1725 Slough Ave, Scranton, PA 18503",
-  "TrackingUrl": "https://fedex.com/tracking?tracknumbers=794820194820",
-  "Items": [
-    { "Quantity": "2", "Name": "Wireless Ergonomic Keyboard" },
-    { "Quantity": "1", "Name": "USB-C Dual 4K Docking Station" }
-  ]
+  "OrderNumber": "ORD-2026-9901",
+  "CustomerName": "Emily Watson",
+  "Carrier": "FedEx",
+  "ShippingService": "Priority 2-Day Air",
+  "EstimatedDelivery": "Thursday, Nov 19, by 4:30 PM",
+  "TrackingNumber": "7489 0182 4491 8820",
+  "TrackingUrl": "https://www.fedex.com/tracking?tracknumbers=7489018244918820",
+  "ProductName": "Developer Mechanical Keyboard (RGB Wireless)",
+  "Variant": "Space Gray / Gateron Brown",
+  "Quantity": 1,
+  "Price": "$179.00",
+  "ShippingAddress": "742 Evergreen Terrace, Springfield, OR 97477",
+  "DeliveryGraphicUrl": "https://dummyimage.com/1072x260/059669/ffffff.png&text=Order+Shipped+•+On+Its+Way",
+  "ProductImageUrl": "https://dummyimage.com/120x120/1e293b/38bdf8.png&text=Keyboard"
 }
-

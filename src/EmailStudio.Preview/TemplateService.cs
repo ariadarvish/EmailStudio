@@ -46,20 +46,25 @@ public sealed class TemplateService
 
     public void ReloadLocales()
     {
-        if (Directory.Exists(_options.LocalesDirectory))
+        try
         {
-            foreach (var file in Directory.GetFiles(_options.LocalesDirectory, "*.json"))
+            if (Directory.Exists(_options.LocalesDirectory))
             {
-                try
+                foreach (var file in Directory.GetFiles(_options.LocalesDirectory, "*.json"))
                 {
-                    _localeManager.LoadJsonFile(file);
-                }
-                catch
-                {
-                    // Ignore malformed locale during reload
+                    try
+                    {
+                        _localeManager.LoadJsonFile(file);
+                    }
+                    catch
+                    {
+                        // Ignore malformed locale during reload
+                    }
                 }
             }
         }
+        catch (DirectoryNotFoundException) { }
+        catch (IOException) { }
     }
 
     public IReadOnlyList<TemplateSummary> GetTemplates()

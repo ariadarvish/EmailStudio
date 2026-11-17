@@ -1,0 +1,83 @@
+---
+subject: Receipt for Invoice #{InvoiceNumber}
+preheader: Thank you for your payment of {TotalAmount}. Your receipt is ready.
+layout: _Layouts/Base.cshtml
+tags: [billing, invoice, transactional]
+---
+@model EmailStudio.Samples.InvoiceReceiptModel
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="margin-bottom: 24px;">
+    <tr>
+        <td valign="middle">
+            <Image src="@Model.LogoUrl" alt="Contoso" width="120" height="30" />
+        </td>
+        <td valign="middle" align="right">
+            <span style="background-color: #d1fae5; color: #065f46; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 9999px;">
+                PAID
+            </span>
+        </td>
+    </tr>
+</table>
+
+<Heading level="1">Receipt from Contoso</Heading>
+
+<p style="color: #64748b; font-size: 14px; margin: 0 0 20px 0;">
+    Invoice <strong>#@Model.InvoiceNumber</strong> &bull; Paid on @Model.PaymentDate
+</p>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 24px;">
+    <tr>
+        <td style="padding: 16px 20px;">
+            <p style="margin: 0; font-size: 12px; text-transform: uppercase; color: #64748b; font-weight: 600;">Billed To</p>
+            <p style="margin: 4px 0 0 0; font-weight: 600; color: #0f172a; font-size: 14px;">@Model.CustomerName</p>
+            <p style="margin: 2px 0 0 0; color: #475569; font-size: 13px;">@Model.CustomerEmail</p>
+            <p style="margin: 2px 0 0 0; color: #64748b; font-size: 13px;">@Model.PaymentMethod</p>
+        </td>
+    </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="border-collapse: collapse; margin-bottom: 24px;">
+    <thead>
+        <tr style="border-bottom: 2px solid #e2e8f0; text-align: left; font-size: 12px; text-transform: uppercase; color: #64748b;">
+            <th style="padding: 10px 0;">Description</th>
+            <th style="padding: 10px 0; text-align: center;">Qty</th>
+            <th style="padding: 10px 0; text-align: right;">Amount</th>
+        </tr>
+    </thead>
+    <tbody style="font-size: 14px; color: #334155;">
+        @foreach (var item in @Model.Items)
+        {
+            <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 12px 0;"><strong>@item.Description</strong></td>
+                <td style="padding: 12px 0; text-align: center; color: #64748b;">@item.Quantity</td>
+                <td style="padding: 12px 0; text-align: right;">@item.Amount</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2" style="padding: 12px 0 4px 0; text-align: right; color: #64748b; font-size: 13px;">Subtotal:</td>
+            <td style="padding: 12px 0 4px 0; text-align: right; font-weight: 600; font-size: 13px;">@Model.Subtotal</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding: 4px 0 4px 0; text-align: right; color: #64748b; font-size: 13px;">Tax:</td>
+            <td style="padding: 4px 0 4px 0; text-align: right; font-weight: 600; font-size: 13px;">@Model.Tax</td>
+        </tr>
+        <tr style="font-size: 16px;">
+            <td colspan="2" style="padding: 10px 0 0 0; text-align: right; font-weight: 700; color: #0f172a; border-top: 2px solid #0f172a;">Total Paid:</td>
+            <td style="padding: 10px 0 0 0; text-align: right; font-weight: 700; color: #0f172a; border-top: 2px solid #0f172a;">@Model.TotalAmount</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div style="text-align: center; margin: 28px 0;">
+    <Button href="@Model.DownloadPdfUrl" background="#0f172a" color="#ffffff">
+        Download PDF Invoice
+    </Button>
+</div>
+
+<Divider margin="20px 0" />
+
+<p class="text-muted" style="margin: 0; text-align: center; font-size: 12px;">
+    Questions about this receipt? Contact our billing team at <a href="mailto:billing@contoso.com" style="color: #2563eb;">billing@contoso.com</a>.
+</p>

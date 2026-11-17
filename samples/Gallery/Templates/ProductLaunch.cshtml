@@ -1,0 +1,67 @@
+---
+subject: Introducing {ProductName}: The Future of {Category}
+preheader: Discover powerful new features built for your workflow. Available today.
+layout: _Layouts/Base.cshtml
+tags: [announcement, product, marketing]
+---
+@model EmailStudio.Samples.ProductLaunchModel
+
+<div style="text-align: center; margin-bottom: 24px;">
+    <Image src="@Model.LogoUrl" alt="Brand Logo" width="140" height="36" />
+</div>
+
+<div style="border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
+    <Image src="@Model.HeroImageUrl" alt="@Model.ProductName Launch Banner" width="536" height="240" />
+</div>
+
+<Heading level="1">Meet @Model.ProductName</Heading>
+
+<p style="font-size: 16px; color: #475569; line-height: 1.6;">
+    Hi @Model.RecipientName, today we are thrilled to announce <strong>@Model.ProductName</strong> — completely re-engineered from the ground up to accelerate your team's productivity.
+</p>
+
+<Spacer height="16px" />
+
+<div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+    <h3 style="margin: 0 0 12px 0; font-size: 16px; color: #0f172a;">What's new in this release:</h3>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+        <tr>
+            <td width="32" valign="top" style="padding-bottom: 12px;">⚡</td>
+            <td style="padding-bottom: 12px; font-size: 14px; color: #334155;">
+                <strong>10x Faster Performance:</strong> Optimized rendering pipeline with zero runtime overhead.
+            </td>
+        </tr>
+        <tr>
+            <td width="32" valign="top" style="padding-bottom: 12px;">🎨</td>
+            <td style="padding-bottom: 12px; font-size: 14px; color: #334155;">
+                <strong>Visual Components:</strong> Table-safe buttons, headers, spacers, and image elements.
+            </td>
+        </tr>
+        <tr>
+            <td width="32" valign="top">🔒</td>
+            <td style="font-size: 14px; color: #334155;">
+                <strong>Native AOT Ready:</strong> Built from the ground up for modern .NET workloads.
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div style="text-align: center; margin: 32px 0;">
+    <Button href="@Model.ActionUrl" background="#2563eb" color="#ffffff">
+        Explore @Model.ProductName Now →
+    </Button>
+</div>
+
+<Divider margin="28px 0" />
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+    <tr>
+        <td width="56" valign="top">
+            <Image src="@Model.AuthorAvatarUrl" alt="@Model.AuthorName" width="48" height="48" />
+        </td>
+        <td style="vertical-align: middle; padding-left: 12px;">
+            <p style="margin: 0; font-weight: 600; color: #0f172a; font-size: 14px;">@Model.AuthorName</p>
+            <p style="margin: 2px 0 0 0; color: #64748b; font-size: 13px;">@Model.AuthorTitle, Contoso</p>
+        </td>
+    </tr>
+</table>

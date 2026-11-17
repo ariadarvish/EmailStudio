@@ -1,0 +1,24 @@
+{
+  "InvoiceNumber": "INV-2026-8812",
+  "PaymentDate": "November 17, 2026",
+  "TotalAmount": "$149.00",
+  "Subtotal": "$135.45",
+  "Tax": "$13.55",
+  "CustomerName": "Acme Corp (Attn: John Doe)",
+  "CustomerEmail": "john.doe@acme.com",
+  "PaymentMethod": "Mastercard ending in 4242",
+  "LogoUrl": "https://dummyimage.com/240x60/0f172a/ffffff.png&text=Contoso+Billing",
+  "DownloadPdfUrl": "https://app.contoso.com/invoices/INV-2026-8812.pdf",
+  "Items": [
+    {
+      "Description": "EmailStudio Pro Plan (Annual Subscription)",
+      "Quantity": 1,
+      "Amount": "$120.00"
+    },
+    {
+      "Description": "Dedicated Dedicated IP Addon",
+      "Quantity": 1,
+      "Amount": "$15.45"
+    }
+  ]
+}

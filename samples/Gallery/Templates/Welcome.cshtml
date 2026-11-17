@@ -1,18 +1,44 @@
 ---
 subject: Welcome to Contoso, {Name}!
-layout: _Layouts/Base
+preheader: Your developer workspace is ready. Let's get you set up in 3 easy steps.
+layout: _Layouts/Base.cshtml
+tags: [onboarding, transactional]
 ---
-@model Contoso.Emails.WelcomeModel
+@model EmailStudio.Samples.WelcomeModel
 
-<Heading Level="1">Welcome aboard, @Model.Name!</Heading>
-<p>Thanks for creating an account with Contoso. We're excited to help you streamline your developer workflows.</p>
-<p>To get started, please confirm your email address by clicking the button below:</p>
+<div style="text-align: center; margin-bottom: 24px;">
+    <Image src="@Model.LogoUrl" alt="Contoso" width="130" height="32" />
+</div>
 
-<Spacer Height="20" />
-<Button Href="@Model.ConfirmUrl" BgColor="#2563eb">Confirm Email Address</Button>
-<Spacer Height="20" />
+<div style="border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
+    <Image src="@Model.BannerUrl" alt="Welcome to Contoso" width="536" height="180" />
+</div>
 
-<p class="text-muted">If button clicking does not work, copy and paste this link into your browser: <br/>@Model.ConfirmUrl</p>
-<Divider />
-<p style="font-size: 13px; color: #64748b;">This confirmation link will expire in 24 hours.</p>
+<Heading level="1">Welcome aboard, @Model.Name!</Heading>
 
+<p style="font-size: 15px; color: #475569; line-height: 1.6;">
+    Thank you for creating an account with Contoso. Your organization workspace is now live and waiting for you.
+</p>
+
+<Spacer height="12px" />
+
+<div style="background-color: #f1f5f9; border-radius: 8px; padding: 18px 20px; margin-bottom: 24px;">
+    <p style="margin: 0 0 10px 0; font-weight: 600; color: #1e293b; font-size: 14px;">Next steps to get started:</p>
+    <ul style="margin: 0; padding-left: 20px; color: #334155; font-size: 14px; line-height: 1.8;">
+        <li>Invite your team members to collaborate</li>
+        <li>Connect your Git repository or CI/CD pipelines</li>
+        <li>Set up your production notification channels</li>
+    </ul>
+</div>
+
+<div style="text-align: center; margin: 32px 0;">
+    <Button href="@Model.ActionUrl" background="#2563eb" color="#ffffff">
+        Open Your Workspace
+    </Button>
+</div>
+
+<Divider margin="24px 0" />
+
+<p class="text-muted" style="margin: 0; text-align: center;">
+    Need help? Check out our <a href="@Model.DocsUrl" style="color: #2563eb; text-decoration: underline;">Quickstart Documentation</a> or reply to this email.
+</p>
