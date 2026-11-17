@@ -13,6 +13,8 @@ public static class PreviewDashboardHtml
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EmailStudio — Template Preview</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -283,7 +285,10 @@ public static class PreviewDashboardHtml
 <body>
     <div id="sidebar">
         <div class="brand">
-            <span>EmailStudio</span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="/favicon.svg" width="24" height="24" alt="EmailStudio Logo" style="border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.3); display: block;" />
+                <span>EmailStudio</span>
+            </div>
             <span class="badge">Preview</span>
         </div>
         <div class="controls">
@@ -533,5 +538,45 @@ public static class PreviewDashboardHtml
 </body>
 </html>
 """;
+
+    public const string FaviconSvg = """
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="esBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="45%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#9333ea" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#38bdf8" flood-opacity="0.6" />
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#0f172a" flood-opacity="0.4" />
+    </filter>
+  </defs>
+  <rect x="3" y="3" width="58" height="58" rx="14" fill="url(#esBg)" />
+  <rect x="3" y="3" width="58" height="58" rx="14" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+  <g filter="url(#shadow)">
+    <rect x="13" y="21" width="38" height="26" rx="3" fill="#0f172a" fill-opacity="0.35" />
+    <rect x="13" y="21" width="38" height="26" rx="3" fill="none" stroke="#ffffff" stroke-width="2.5" />
+    <path d="M 13.5 22.5 L 32 37 L 50.5 22.5" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M 28 33.8 L 32 37 L 36 33.8" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" filter="url(#glow)" />
+    <path d="M 14.5 45.5 L 26 34" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.8" />
+    <path d="M 49.5 45.5 L 38 34" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.8" />
+    <g filter="url(#glow)">
+      <path d="M 18.5 28 C 17.5 28 17 29 17 30 C 17 31 16.2 31.5 15.5 31.5 C 16.2 31.5 17 32 17 33 C 17 34 17.5 35 18.5 35" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" />
+      <line x1="21.5" y1="28" x2="19.5" y2="35" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" />
+    </g>
+    <g filter="url(#glow)">
+      <line x1="44.5" y1="28" x2="42.5" y2="35" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" />
+      <path d="M 45.5 28 C 46.5 28 47 29 47 30 C 47 31 47.8 31.5 48.5 31.5 C 47.8 31.5 47 32 47 33 C 47 34 46.5 35 45.5 35" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" />
+    </g>
+    <line x1="25" y1="42" x2="39" y2="42" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)" />
+  </g>
+</svg>
+""";
+
+    public static readonly byte[] FaviconIcoBytes = Convert.FromBase64String(
+        "AAABAAEAICAQAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAgICAAMDAwAAAAP8AAP8AAAD//wD/AAAA/wD/AP//AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEVVVVVVVVQAAAAAAAAAAEzMzMxVVV3VUAAAAAAAAATMzMzFVVVVVdUAAAAAAABMzMzMzMVVVVVVQAAAAAAATMzMzMzMVVVVXVAAAAAAAEzMxmZmZmZ3VVVQAAAAAABMzGj/////+HVVUAAAAAAAbMyHj4iIj4iMVVAAAAAAAGzM/3j/j/h//FVQAAAAAABsxv+Gh2eH//xcUAAAAAAAbMb4+Gj4aIj8zFAAAAAAAGzG//aP/4aP/MxQAAAAAABsxv/o///4f/zMUAAAAAAAbMz+j////4j8zFAAAAAAAGzMeP/////4fMxQAAAAAABszMfud3d3d8zMQAAAAAAAbMzMzMzMzMzMzEAAAAAAAEzMzMzMzMzMzMxAAAAAAAAGzMzMzMzMzMzEAAAAAAAAAGzMzMzMzMzMQAAAAAAAAAAEZmZmZmZmRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAA/////w==");
 }
 

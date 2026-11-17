@@ -77,6 +77,10 @@ public static class PreviewServer
         // Developer Dashboard UI
         app.MapGet("/", () => Results.Content(PreviewDashboardHtml.Content, "text/html"));
 
+        // Favicon Endpoints
+        app.MapGet("/favicon.svg", () => Results.Content(PreviewDashboardHtml.FaviconSvg, "image/svg+xml"));
+        app.MapGet("/favicon.ico", () => Results.Bytes(PreviewDashboardHtml.FaviconIcoBytes, "image/x-icon"));
+
         // Template List API
         app.MapGet("/api/templates", (TemplateService svc) => Results.Ok(svc.GetTemplates()));
 

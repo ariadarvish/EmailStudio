@@ -8,15 +8,14 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 
-    <Authors>EmailStudio Contributors</Authors>
-    <Company>EmailStudio</Company>
-    <Product>EmailStudio</Product>
+    <Authors>Aria Darvish</Authors>
+
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/emailstudio/emailstudio</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/emailstudio/emailstudio</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/ariadarvish/EmailStudio</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ariadarvish/EmailStudio</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <VersionPrefix>0.1.0</VersionPrefix>
-    <VersionSuffix>alpha</VersionSuffix>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <Description>A cross-platform email template studio for building beautiful, responsive, and accessible emails.</Description>
   </PropertyGroup>
 </Project>
 

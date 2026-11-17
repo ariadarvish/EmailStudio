@@ -8,6 +8,7 @@
     <PackageId>EmailStudio.Tool</PackageId>
     <Description>Local preview CLI tool for EmailStudio templates.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +18,10 @@
 
   <ItemGroup>
     <None Include="..\..\README.md"
+          Pack="true"
+          PackagePath=""
+          Visible="false" />
+    <None Include="..\..\assets\icon.png"
           Pack="true"
           PackagePath=""
           Visible="false" />

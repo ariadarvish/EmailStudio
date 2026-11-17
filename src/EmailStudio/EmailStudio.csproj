@@ -4,6 +4,7 @@
     <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
     <Description>Compile-time email templating engine producing email-ready HTML and text drafts.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +26,10 @@
           PackagePath="build"
           Visible="false" />
     <None Include="..\..\README.md"
+          Pack="true"
+          PackagePath=""
+          Visible="false" />
+    <None Include="..\..\assets\icon.png"
           Pack="true"
           PackagePath=""
           Visible="false" />

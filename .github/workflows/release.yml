@@ -1,29 +1,67 @@
-name: Release
+name: Publish Package
 
 on:
+  release:
+    types: [published]
   push:
     tags:
+      - 'v*.*.*'
       - 'v*'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+permissions:
+  contents: read
+  packages: write     # Required for publishing to GitHub Packages without an API key
+  id-token: write    # Required for OIDC tokens
 
 jobs:
-  publish:
-    name: Package and Publish
+  build-and-publish:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
 
-      - name: Setup .NET
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required for SourceLink to embed full Git commit history
+
+      - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: |
+            10.0.x
+            11.0.x
 
-      - name: Pack packages
-        run: dotnet pack --configuration Release --output ./artifacts
+      - name: Restore Dependencies
+        run: dotnet restore
 
-      - name: Publish to NuGet
-        if: env.NUGET_API_KEY != ''
+      - name: Build Solution in Release Mode
+        run: dotnet build -c Release --no-restore
+
+      - name: Run Unit Tests
+        run: dotnet test -c Release --no-build --verbosity normal
+
+      - name: Pack NuGet Packages
+        run: dotnet pack -c Release --output ./artifacts
+
+      # -------------------------------------------------------------------
+      # 1. Publish to GitHub Packages (Uses GITHUB_TOKEN - No API key needed)
+      # -------------------------------------------------------------------
+      - name: Publish to GitHub Packages
+        run: |
+          dotnet nuget add source --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+          dotnet nuget push ./artifacts/*.nupkg --source github --skip-duplicate
+
+      # -------------------------------------------------------------------
+      # 2. Publish to NuGet.org (Uses GitHub Encrypted Secret)
+      # -------------------------------------------------------------------
+      - name: Publish to NuGet.org
+        if: env.NUGET_KEY_EXISTS == 'true'
         env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: dotnet nuget push ./artifacts/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+          NUGET_KEY_EXISTS: ${{ secrets.NUGET_API_KEY != '' }}
+        run: |
+          dotnet nuget push ./artifacts/*.nupkg \
+            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+
 
