@@ -2,9 +2,10 @@
 
 > The local authoring and preview toolchain for transactional email in .NET. ("react-email for .NET")
 
-[![CI](https://github.com/emailstudio/emailstudio/actions/workflows/ci.yml/badge.svg)](https://github.com/emailstudio/emailstudio/actions/workflows/ci.yml)
+[![Publish](https://github.com/ariadarvish/EmailStudio/actions/workflows/release.yml/badge.svg)](https://github.com/ariadarvish/EmailStudio/actions/workflows/release.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![NuGet](https://img.shields.io/nuget/v/EmailStudio.svg)](https://www.nuget.org/packages/EmailStudio/)
+[![NuGet: EmailStudio](https://img.shields.io/nuget/v/EmailStudio.svg)](https://www.nuget.org/packages/EmailStudio/)
+[![NuGet: EmailStudio.Tool](https://img.shields.io/nuget/v/EmailStudio.Tool.svg?label=EmailStudio.Tool)](https://www.nuget.org/packages/EmailStudio.Tool/)
 
 EmailStudio bridges the developer experience gap for transactional emails in .NET. It compiles `.cshtml` templates into typed, zero-runtime-Razor C# render methods at compile time and runs a local preview server with instant hot reload.
 
@@ -12,17 +13,17 @@ EmailStudio bridges the developer experience gap for transactional emails in .NE
 ┌────────────────────────────────────────────────────────────────────────┐
 │ EmailStudio Local Preview - http://localhost:5055                     │
 ├───────────────┬────────────────────────────────────────────────────────┤
-│ Templates (10)│ Viewport: [ Desktop (700px) ] [ Mobile (375px) ]       │
+│ Templates (6) │ Viewport: [ Desktop (700px) ] [ Mobile (375px) ]       │
 │ > Welcome     │ Dark Mode: [OFF]  Culture: [ en-US (default) v ]       │
-│   ResetPass   ├────────────────────────────────────────────────────────┤
-│   InvoicePaid │ Welcome to EmailStudio!                                │
-│   InvoiceOver │                                                        │
-│   TeamInvite  │ Welcome, Jane!                                         │
-│   PassChanged │ Your workspace is ready. Click below to begin.         │
-│   WeeklyDigest│                                                        │
-│   ShippingNot │            [ Open Workspace ]                          │
-│   AccountDel  │                                                        │
-│   TwoFactorEn │ © 2026 EmailStudio. All rights reserved.               │
+│   ProductLaun ├────────────────────────────────────────────────────────┤
+│   InvoiceRece │ SUBJECT: Welcome to EmailStudio, Jane!                 │
+│   ShippingNot │ PREHEADER: Your developer workspace is ready.          │
+│   SecurityAle │ SIZE: 14.2 KB / 102 KB (OK)                            │
+│   PersianWelc ├────────────────────────────────────────────────────────┤
+│               │ Welcome to EmailStudio!                                │
+│               │ Welcome, Jane! Your workspace is ready.                │
+│               │                  [ Open Workspace ]                    │
+│               │ © 2026 Sample Company. All rights reserved.            │
 └───────────────┴────────────────────────────────────────────────────────┘
 ```
 
@@ -46,6 +47,8 @@ dotnet email-preview serve
 - **Deterministic Output**: Reliable, byte-for-byte reproducible HTML output for robust snapshot testing.
 - **Built-in Email Components**: Table-safe `<Button>`, `<Heading>`, `<Divider>`, `<Spacer>`, `<Image>`, and `<T.Try>`.
 - **PreMailer CSS Inlining**: Inlines standard styles while preserving responsive `@media` queries in the `<head>`.
+- **Email Envelope Inspector**: Live inspection of Subject, Preheader, and real-time payload size tracking with Gmail 102 KB clipping warning.
+- **Full RTL & i18n Localization**: Built-in support for Right-to-Left languages (e.g. Persian, Arabic) and multi-lingual JSON locale dictionaries.
 - **Local Preview Server**: Live browser previews, mobile (375px)/desktop (700px) viewports, dark mode simulation, live syntax errors, and test SMTP forwarding (e.g. Mailpit/Inbucket on port 1025).
 - **Separation of Concerns**: Generates pure `EmailDraft` (Subject, Html, Text); leaves delivery to MailKit, FluentEmail, or AWS SES.
 
@@ -103,17 +106,13 @@ Console.WriteLine(draft.PlainText); // Clean markdown-like plain text
 
 ## Sample Gallery
 
-The repository includes a ready-to-run gallery in `samples/Gallery` featuring 10 production-ready transactional templates:
-1. `Welcome`: Account activation with hero CTA button
-2. `ResetPassword`: Security reset link with timeout note
-3. `InvoicePaid`: Receipt with billing breakdown table
-4. `InvoiceOverdue`: Urgent payment reminder notice
-5. `TeamInvite`: Collaborative organization invitation
-6. `PasswordChanged`: Security confirmation alert
-7. `WeeklyDigest`: Multi-item summary cards and statistics
-8. `ShippingNotification`: Order tracking details and package ETA
-9. `AccountDeleted`: Account closure confirmation
-10. `TwoFactorEnabled`: Security notice with 2FA backup codes
+The repository includes a ready-to-run gallery in `samples/Gallery` featuring 6 rich, production-ready transactional templates:
+1. `Welcome`: Account activation and onboarding with hero CTA button
+2. `ProductLaunch`: Rich product announcement with hero imagery, feature highlights, and pricing CTA
+3. `InvoiceReceipt`: Itemized financial receipt with billing table, subtotal, taxes, and transaction metadata
+4. `ShippingNotification`: Order fulfillment notice with delivery timeline and carrier tracking
+5. `SecurityAlert`: Unrecognized device/location login warning with IP info and immediate security action CTAs
+6. `PersianWelcome`: Native Right-to-Left (RTL) template with Persian typography and `fa-IR` localization
 
 ---
 
@@ -127,7 +126,7 @@ Follow these steps to clone, build, and explore the project in under 60 seconds:
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/emailstudio/emailstudio.git
+git clone https://github.com/ariadarvish/EmailStudio.git
 cd EmailStudio
 ```
 
@@ -151,7 +150,7 @@ Now open **http://localhost:5055** in your browser.
 1. Open `EmailStudio.slnx` in Visual Studio.
 2. Ensure **`EmailStudio.Preview`** (or **`EmailStudio.Tool`**) is selected in the Startup Projects dropdown.
 3. Press **F5** (or click the green **Play** button).
-4. Visual Studio will launch Kestrel and open your browser to **http://localhost:5055** automatically with the 10 gallery templates loaded.
+4. Visual Studio will launch Kestrel and open your browser to **http://localhost:5055** automatically with the 6 gallery templates loaded.
 
 ### Step 4: Try Live Hot Reload
 1. Keep the browser open at `http://localhost:5055`.
@@ -201,14 +200,14 @@ Create or edit `Templates/Welcome.cshtml`:
 
 ```html
 ---
-subject: Welcome to Contoso, @Model.UserName!
+subject: Welcome to SampleApp, @Model.UserName!
 preheader: Your developer workspace is ready.
 tags: [onboarding]
 ---
 @model YourApp.Models.WelcomeEmailModel
 
 <Heading level="1">Welcome aboard, @Model.UserName!</Heading>
-<p>Thank you for joining Contoso. Your organization workspace is now configured.</p>
+<p>Thank you for joining SampleApp. Your workspace is now configured.</p>
 
 <Button href="@Model.ActionUrl" background="#2563eb" color="#ffffff">
     Open Your Dashboard
@@ -222,7 +221,7 @@ Create sample mock data in `Templates/Welcome.sample.json` so you can preview it
 ```json
 {
   "UserName": "Alex Morgan",
-  "ActionUrl": "https://contoso.com/get-started"
+  "ActionUrl": "https://example.com/get-started"
 }
 ```
 
@@ -244,12 +243,12 @@ public class NotificationService
 {
     public async Task SendWelcomeEmailAsync(string email, string name)
     {
-        var model = new WelcomeEmailModel(name, "https://app.contoso.com/login");
+        var model = new WelcomeEmailModel(name, "https://app.example.com/login");
 
         // Zero-runtime Razor: Generated at compile time, Native AOT friendly!
         EmailDraft draft = EmailTemplates.RenderWelcome(model, culture: "en-US");
 
-        Console.WriteLine(draft.Subject);   // "Welcome to Contoso, Alex Morgan!"
+        Console.WriteLine(draft.Subject);   // "Welcome to SampleApp, Alex Morgan!"
         Console.WriteLine(draft.HtmlBody);  // CSS-inlined, responsive HTML
         Console.WriteLine(draft.PlainText); // Clean markdown-like text
 
@@ -269,7 +268,7 @@ using MailKit.Net.Smtp;
 async Task DispatchEmailAsync(string recipientEmail, EmailDraft draft)
 {
     var message = new MimeMessage();
-    message.From.Add(new MailboxAddress("Contoso", "noreply@contoso.com"));
+    message.From.Add(new MailboxAddress("SampleApp", "noreply@example.com"));
     message.To.Add(new MailboxAddress("", recipientEmail));
     message.Subject = draft.Subject;
 
@@ -315,5 +314,5 @@ public Task WelcomeEmail_ShouldMatchSnapshot()
 
 ## License
 
-MIT © EmailStudio Contributors.
+MIT © Aria Darvish / EmailStudio Contributors.
 
