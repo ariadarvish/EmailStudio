@@ -2,7 +2,7 @@
 
 > The local authoring and preview toolchain for transactional email in .NET. ("react-email for .NET")
 
-[![CI](https://github.com/emailstudio/emailstudio/actions/workflows/release.yml/badge.svg)](https://github.com/emailstudio/emailstudio/actions/workflows/release.yml)
+[![CI](https://github.com/ariadarvish/emailstudio/actions/workflows/release.yml/badge.svg)](https://github.com/ariadarvish/emailstudio/actions/workflows/release.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![NuGet](https://img.shields.io/nuget/v/EmailStudio.svg)](https://www.nuget.org/packages/EmailStudio/)
 
